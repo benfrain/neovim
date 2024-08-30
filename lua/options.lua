@@ -60,6 +60,7 @@ opt.nrformats:append("alpha") -- this means you can increment lists that have le
 opt.ph = 15 -- the number is the number of entries to show before scrollbars, not px!
 opt.cmdheight = 0
 opt.virtualedit = "block" -- allows using visual blocks beyond the end of a line
+vim.g.editorconfig = false -- disable editor config as VSCode does not have it on by default
 
 local api = vim.api
 -- Highlight on yank
