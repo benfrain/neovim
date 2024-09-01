@@ -195,4 +195,4 @@ km.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 --
 -- Set file EOL
 km.set({ "n" }, "<Leader>xl", ":set ff=dos<CR>", { desc = "EOL = CRLF" })
-km.set({ "n" }, "<Leader>xu", ":set ff=unix<CR>", { desc = "EOL = LF" })
+km.set({ "n" }, "<Leader>xf", ":set ff=unix<CR>", { desc = "EOL = LF" })
