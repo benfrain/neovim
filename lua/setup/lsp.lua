@@ -46,7 +46,7 @@ require("lspconfig").cssls.setup({
     client.server_capabilities.document_formatting = false
   end,
 })
-require("lspconfig").tsserver.setup({
+require("lspconfig").ts_ls.setup({
   capabilities = capabilities,
   on_attach = function(client)
     client.server_capabilities.document_formatting = false
