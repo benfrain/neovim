@@ -88,27 +88,11 @@ return {
       config = get_setup("navbuddy"),
     },
   },
-  -- { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-  -- {
-  --   "nvim-telescope/telescope.nvim",
-  --   cmd = "Telescope",
-  --   config = get_setup("telescope"),
-  -- },
-  -- { "nvim-telescope/telescope-file-browser.nvim" },
   {
     "ibhagwan/fzf-lua",
     -- optional for icon support
     dependencies = { "nvim-tree/nvim-web-devicons" },
-    config = function()
-      -- calling `setup` is optional for customization
-      require("fzf-lua").setup({
-        defaults = {
-          git_icons = false,
-          file_icons = false,
-          color_icons = false,
-        },
-      })
-    end,
+    config = get_setup("fzf"),
   },
   { "rmagatti/auto-session", config = get_setup("auto-session") },
   { "echasnovski/mini.ai", config = get_setup("mini-ai"), version = false },
