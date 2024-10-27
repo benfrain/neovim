@@ -1,5 +1,6 @@
 require("fzf-lua").setup({
   fzf_opts = { ["--wrap"] = true },
+  grep = { rg_glob = true },
   winopts = {
     preview = {
       wrap = "wrap",
