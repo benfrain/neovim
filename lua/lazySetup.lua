@@ -10,7 +10,7 @@ return {
   { "kdheepak/lazygit.nvim" },
   { "kyazdani42/nvim-web-devicons" },
   { "nvim-lua/plenary.nvim" },
-  { "rebelot/kanagawa.nvim", config = get_setup("kanagawa"), priority = 1000, lazy = false },
+  { "rebelot/kanagawa.nvim", config = get_setup("themes/kanagawa"), priority = 1000, lazy = false },
   { "stevearc/dressing.nvim", event = "VeryLazy" },
   { "stevearc/oil.nvim", event = "VeryLazy", config = get_setup("oil") },
   {
