@@ -71,22 +71,9 @@ return {
     config = get_setup("gitsigns"),
   },
   { "bennypowers/nvim-ts-autotag", branch = "template-tags", event = "InsertEnter" },
-  -- {
-  --   "winston0410/range-highlight.nvim",
-  --   dependencies = { { "winston0410/cmd-parser.nvim" } },
-  --   config = get_setup("range-highlight"),
-  -- },
   {
     "neovim/nvim-lspconfig",
     config = get_setup("lsp"),
-    dependencies = {
-      "SmiteshP/nvim-navbuddy",
-      dependencies = {
-        "SmiteshP/nvim-navic",
-        "MunifTanjim/nui.nvim",
-      },
-      config = get_setup("navbuddy"),
-    },
   },
   {
     "ibhagwan/fzf-lua",
