@@ -1,3 +1,23 @@
+local mode_map = {
+  ["NORMAL"] = "N",
+  ["O-PENDING"] = "N?",
+  ["INSERT"] = "I",
+  ["VISUAL"] = "V",
+  ["V-BLOCK"] = "VB",
+  ["V-LINE"] = "VL",
+  ["V-REPLACE"] = "VR",
+  ["REPLACE"] = "R",
+  ["COMMAND"] = "!",
+  ["SHELL"] = "SH",
+  ["TERMINAL"] = "T",
+  ["EX"] = "X",
+  ["S-BLOCK"] = "SB",
+  ["S-LINE"] = "SL",
+  ["SELECT"] = "S",
+  ["CONFIRM"] = "Y?",
+  ["MORE"] = "M",
+}
+
 local function getWords()
   if vim.bo.filetype == "md" or vim.bo.filetype == "txt" or vim.bo.filetype == "markdown" then
     if vim.fn.wordcount().visual_words == 1 then
@@ -73,7 +93,13 @@ require("lualine").setup({
   },
   sections = {
     lualine_a = {
-      { "mode", fmt = trunc(80, 1, nil, true) },
+      -- { "mode", fmt = trunc(80, 1, nil, true) },
+      {
+        "mode",
+        fmt = function(s)
+          return mode_map[s] or s
+        end,
+      },
     },
     lualine_b = {
       { "branch", icon = "󰘬" },
@@ -133,7 +159,7 @@ require("lualine").setup({
         },
       },
     },
-    lualine_y = { { require("auto-session.lib").current_session_name } },
+    lualine_y = { nil },
     lualine_z = {
       { place, padding = { left = 1, right = 1 } },
     },
