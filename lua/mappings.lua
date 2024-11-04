@@ -72,6 +72,8 @@ km.set("n", "<leader>r", require("fzf-lua").registers, { desc = "Registers" })
 
 km.set("n", "<leader>m", require("fzf-lua").marks, { desc = "Marks" })
 
+km.set("n", "<leader>k", require("fzf-lua").keymaps, { desc = "Keymaps" })
+
 km.set("n", "<leader>f", require("fzf-lua").live_grep, { desc = "Fzf Grep" })
 
 km.set("n", "<leader>b", require("fzf-lua").buffers, { desc = "Fzf Buffers" })

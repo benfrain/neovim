@@ -18,7 +18,7 @@ function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
 end
 
 --Enable (broadcasting) snippet capability for completion
-local capabilities = require("cmp_nvim_lsp").default_capabilities()
+-- local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 -- LSP Server config
 require("lspconfig").cssls.setup({
