@@ -45,47 +45,12 @@ return {
     event = "BufReadPost",
   },
   { "rcarriga/nvim-notify" },
-  -- {
-  --   "hrsh7th/nvim-cmp",
-  --   dependencies = {
-  --     { "hrsh7th/cmp-nvim-lsp" },
-  --     { "hrsh7th/cmp-nvim-lua" },
-  --     { "hrsh7th/cmp-buffer" },
-  --     { "hrsh7th/cmp-path" },
-  --     { "hrsh7th/cmp-cmdline" },
-  --     { "hrsh7th/vim-vsnip" },
-  --     { "hrsh7th/cmp-vsnip" },
-  --     { "hrsh7th/vim-vsnip-integ" },
-  --     { "hrsh7th/cmp-calc" },
-  --     { "hrsh7th/cmp-nvim-lsp-signature-help" },
-  --     { "rafamadriz/friendly-snippets" },
-  --     { "onsails/lspkind.nvim" },
-  --   },
-  --   config = get_setup("cmp"),
-  --   event = "InsertEnter",
-  -- },
   {
     "saghen/blink.cmp",
     lazy = false, -- lazy loading handled internally
     -- optional: provides snippets for the snippet source
     dependencies = "rafamadriz/friendly-snippets",
-
-    -- use a release tag to download pre-built binaries
-    version = "v0.5.1",
-    opts = {
-      keymap = {
-        -- ["<CR>"] = { "select_and_accept", "fallback" },
-        -- ["<Up>"] = { "select_prev", "fallback" },
-        -- ["<Down>"] = { "select_next", "fallback" },
-        preset = "enter",
-      },
-      highlight = {
-        use_nvim_cmp_as_default = true,
-      },
-      nerd_font_variant = "normal",
-      accept = { auto_brackets = { enabled = true } },
-      trigger = { signature_help = { enabled = true } },
-    },
+    config = get_setup("blink"),
   },
   {
     "lewis6991/gitsigns.nvim",
@@ -96,7 +61,6 @@ return {
   {
     "neovim/nvim-lspconfig",
     config = get_setup("lsp"),
-    -- dependencies = { "saghen/blink.cmp" },
   },
   {
     "ibhagwan/fzf-lua",
@@ -121,18 +85,7 @@ return {
       require("nvim-surround").setup()
     end,
   },
-  {
-    "rmagatti/session-lens",
-    dependencies = { "rmagatti/auto-session", "nvim-telescope/telescope.nvim" },
-    config = get_setup("session"),
-    enabled = false,
-  },
   { "goolord/alpha-nvim", config = get_setup("alpha"), enabled = false },
-  {
-    "gen740/SmoothCursor.nvim",
-    config = get_setup("smoothcursor"),
-    enabled = false,
-  },
   { "EdenEast/nightfox.nvim", config = get_setup("nightfox"), enabled = false },
   { "folke/tokyonight.nvim", config = get_setup("tokyonight"), enabled = false },
   { "catppuccin/nvim", name = "catppuccin", config = get_setup("catppuccin"), enabled = false },
