@@ -85,7 +85,6 @@ return {
       require("nvim-surround").setup()
     end,
   },
-  { "goolord/alpha-nvim", config = get_setup("alpha"), enabled = false },
   { "EdenEast/nightfox.nvim", config = get_setup("nightfox"), enabled = false },
   { "folke/tokyonight.nvim", config = get_setup("tokyonight"), enabled = false },
   { "catppuccin/nvim", name = "catppuccin", config = get_setup("catppuccin"), enabled = false },
