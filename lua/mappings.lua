@@ -202,3 +202,8 @@ km.set({ "n" }, "<Leader>xf", ":set ff=unix<CR>", { desc = "EOL = LF" })
 -- Quick new split above/below
 km.set({ "n" }, "<Leader>ws", "<CMD>new<CR>", { desc = "New split below" })
 km.set({ "n" }, "<Leader>wv", "<CMD>vnew<CR>", { desc = "New split right" })
+
+-- Word Count
+km.set({ "n" }, "<Leader>xw", function()
+  return require("notify")(wordCount.getWords(), "info", { title = " Word Count" })
+end, { desc = "Word Count" })

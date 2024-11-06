@@ -18,7 +18,10 @@ local mode_map = {
   ["MORE"] = "M",
 }
 
-local function getWords()
+-- Make a global table
+wordCount = {}
+-- Now add a function to it for the job needed
+function wordCount.getWords()
   if vim.bo.filetype == "md" or vim.bo.filetype == "txt" or vim.bo.filetype == "markdown" then
     if vim.fn.wordcount().visual_words == 1 then
       return tostring(vim.fn.wordcount().visual_words) .. " word"
@@ -28,7 +31,7 @@ local function getWords()
       return tostring(vim.fn.wordcount().words) .. " words"
     end
   else
-    return ""
+    return "Not a text or markdown file"
   end
 end
 
