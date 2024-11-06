@@ -1,5 +1,4 @@
 require("blink.cmp").setup({
-  version = "v0.5.1",
   opts = {
     keymap = {
       preset = "enter",

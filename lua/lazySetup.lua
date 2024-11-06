@@ -50,6 +50,7 @@ return {
     lazy = false, -- lazy loading handled internally
     -- optional: provides snippets for the snippet source
     dependencies = "rafamadriz/friendly-snippets",
+    version = "v0.5.1",
     config = get_setup("blink"),
   },
   {
