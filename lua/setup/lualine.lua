@@ -135,7 +135,7 @@ require("lualine").setup({
         },
       },
       {
-        getWords,
+        wordCount.getWords,
         color = { fg = "#333333", bg = "#eeeeee" },
         separator = { left = "", right = "" },
       },
