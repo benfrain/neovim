@@ -8,7 +8,6 @@ end
 
 return {
   { "kdheepak/lazygit.nvim" },
-  { "kyazdani42/nvim-web-devicons" },
   { "rebelot/kanagawa.nvim", config = get_setup("themes/kanagawa"), priority = 1000, lazy = false },
   { "stevearc/dressing.nvim", event = "VeryLazy" },
   { "stevearc/oil.nvim", event = "VeryLazy", config = get_setup("oil") },
@@ -58,7 +57,6 @@ return {
     event = "BufReadPre",
     config = get_setup("gitsigns"),
   },
-  { "bennypowers/nvim-ts-autotag", branch = "template-tags", event = "InsertEnter" },
   {
     "neovim/nvim-lspconfig",
     config = get_setup("lsp"),
@@ -75,6 +73,7 @@ return {
   { "echasnovski/mini.bufremove", config = get_setup("mini-bufremove"), version = false },
   { "echasnovski/mini.indentscope", config = get_setup("mini-indentscope"), version = false, event = "VeryLazy" },
   { "echasnovski/mini.move", config = get_setup("mini-move"), version = false },
+  { "windwp/nvim-ts-autotag", event = "InsertEnter" },
   {
     "windwp/nvim-autopairs",
     config = get_setup("autopairs"),
