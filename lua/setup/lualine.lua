@@ -31,7 +31,7 @@ function wordCount.getWords()
       return tostring(vim.fn.wordcount().words) .. " words"
     end
   else
-    return "Not a text or markdown file"
+    return "Not a text file"
   end
 end
 
@@ -138,6 +138,9 @@ require("lualine").setup({
         wordCount.getWords,
         color = { fg = "#333333", bg = "#eeeeee" },
         separator = { left = "", right = "" },
+        cond = function()
+          return wordCount.getWords() ~= "Not a text file"
+        end,
       },
       {
         "searchcount",
