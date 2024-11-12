@@ -66,7 +66,9 @@ km.set("n", "<Leader>v", "gea", { desc = "Edit after last word" })
 
 km.set("n", "j", [[(v:count > 5 ? "m'" . v:count : "") . 'j']], { expr = true, desc = "if j > 5 add to jumplist" })
 
-km.set("n", "<leader>p", require("fzf-lua").files, { desc = "Fzf Files" })
+km.set("n", "<leader>p", require("fzf-lua").files, { desc = "FZF Files" })
+
+km.set("n", "<leader><leader>", require("fzf-lua").resume, { desc = "FZF Resume" })
 
 km.set("n", "<leader>r", require("fzf-lua").registers, { desc = "Registers" })
 
@@ -74,9 +76,13 @@ km.set("n", "<leader>m", require("fzf-lua").marks, { desc = "Marks" })
 
 km.set("n", "<leader>k", require("fzf-lua").keymaps, { desc = "Keymaps" })
 
-km.set("n", "<leader>f", require("fzf-lua").live_grep, { desc = "Fzf Grep" })
+km.set("n", "<leader>f", require("fzf-lua").live_grep, { desc = "FZF Grep" })
 
-km.set("n", "<leader>b", require("fzf-lua").buffers, { desc = "Fzf Buffers" })
+km.set("n", "<leader>b", require("fzf-lua").buffers, { desc = "FZF Buffers" })
+
+km.set("v", "<leader>8", require("fzf-lua").grep_visual, { desc = "FZF Selection" })
+
+km.set("n", "<leader>7", require("fzf-lua").grep_cword, { desc = "FZF Word" })
 
 km.set("n", "<leader>j", require("fzf-lua").helptags, { desc = "Help Tags" })
 
