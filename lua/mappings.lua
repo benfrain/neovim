@@ -211,5 +211,14 @@ km.set({ "n" }, "<Leader>wv", "<CMD>vnew<CR>", { desc = "New split right" })
 
 -- Word Count
 km.set({ "n" }, "<Leader>xw", function()
-  return require("notify")(wordCount.getWords(), "info", { title = " Word Count" })
+  return require("notify")(wordCount.getWords(), "info", {
+    icon = "󰆙 ",
+    title = "Word Count",
+    timeout = 1000,
+    render = "wrapped-compact",
+    top_down = true,
+    opts = {
+      max_width = 10,
+    },
+  })
 end, { desc = "Word Count" })
