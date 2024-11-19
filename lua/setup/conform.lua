@@ -17,7 +17,24 @@ require("conform").setup({
     stylua = {
       args = { "--indent-width", "2", "--indent-type", "Spaces", "-" },
     },
+    prettier = {
+      require_cwd = true,
+      cwd = require("conform.util").root_file({
+        ".prettierrc",
+        ".prettierrc.json",
+        ".prettierrc.yml",
+        ".prettierrc.yaml",
+        ".prettierrc.json5",
+        ".prettierrc.js",
+        ".prettierrc.cjs",
+        ".prettierrc.mjs",
+        ".prettierrc.toml",
+        "prettier.config.js",
+        "prettier.config.cjs",
+        "prettier.config.mjs",
+      }),
+    },
   },
   -- Set up format-on-save
-  format_on_save = { timeout_ms = 1500, lsp_fallback = true },
+  format_on_save = { timeout_ms = 1500, lsp_format = "never" },
 })
