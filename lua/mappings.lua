@@ -110,11 +110,6 @@ km.set(
   { desc = "Document Diagnostics" }
 )
 
--- Built in LSP stuff
--- km.set("n", "<leader>ca", function()
---   vim.lsp.buf.code_action()
--- end, { desc = "Code Actions" })
-
 km.set(
   "n",
   "<leader>ca",
