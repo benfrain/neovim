@@ -20,7 +20,9 @@ require("conform").setup({
       args = { "--indent-width", "2", "--indent-type", "Spaces", "-" },
     },
     prettier = {
+      -- ensure a config file is in the project root
       require_cwd = true,
+      -- allowable config files
       cwd = require("conform.util").root_file({
         ".prettierrc",
         ".prettierrc.json",
@@ -38,5 +40,6 @@ require("conform").setup({
     },
   },
   -- Set up format-on-save
+  -- don't want it formatting with lsp if Prettier isn't available
   format_on_save = { timeout_ms = 1500, lsp_format = "never" },
 })
