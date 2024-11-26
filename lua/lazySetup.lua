@@ -43,13 +43,13 @@ return {
     build = ":TSUpdate",
     event = "BufReadPost",
   },
-  { "rcarriga/nvim-notify" },
+  { "rcarriga/nvim-notify", config = get_setup("notify") },
   {
     "saghen/blink.cmp",
     lazy = false, -- lazy loading handled internally
     -- optional: provides snippets for the snippet source
     dependencies = "rafamadriz/friendly-snippets",
-    version = "v0.5.1",
+    version = "v0.6.1",
     opts = require("setup.blink"),
   },
   {
