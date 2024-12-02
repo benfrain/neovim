@@ -21,7 +21,7 @@ km.set("n", "<Leader>u", ":Lazy update<CR>", { desc = "Lazy Update (Sync)" })
 
 km.set("n", "<Leader>n", "<cmd>enew<CR>", { desc = "New File" })
 
-km.set("n", "<Leader>a", "ggVG<c-$>", { desc = "Select All" })
+km.set("n", "<Leader>a", "ggVG", { desc = "Select All" })
 
 -- Make visual yanks place the cursor back where started
 km.set("v", "y", "ygv<Esc>", { desc = "Yank and reposition cursor" })
@@ -109,6 +109,11 @@ km.set(
   ":lua require'fzf-lua'.diagnostics_document({fzf_opts = { ['--wrap'] = true }})<cr>",
   { desc = "Document Diagnostics" }
 )
+
+-- Built in LSP stuff
+-- km.set("n", "<leader>ca", function()
+--   vim.lsp.buf.code_action()
+-- end, { desc = "Code Actions" })
 
 km.set(
   "n",
