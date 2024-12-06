@@ -21,7 +21,7 @@ km.set("n", "<Leader>u", ":Lazy update<CR>", { desc = "Lazy Update (Sync)" })
 
 km.set("n", "<Leader>n", "<cmd>enew<CR>", { desc = "New File" })
 
-km.set("n", "<Leader>a", "ggVG", { desc = "Select All" })
+km.set("n", "<Leader>a", "ggVG<c-$>", { desc = "Select All" })
 
 -- Make visual yanks place the cursor back where started
 km.set("v", "y", "ygv<Esc>", { desc = "Yank and reposition cursor" })
@@ -222,3 +222,25 @@ km.set({ "n" }, "<Leader>xw", function()
     },
   })
 end, { desc = "Word Count" })
+
+-- get the file format of the current file
+km.set({ "n" }, "<Leader>xt", function()
+  local symbols = {
+    unix = " LF",
+    dos = " CRLF",
+    mac = " CR",
+  }
+
+  local ft = vim.bo.fileformat
+  local output = string.format("%s%s", ft, symbols[ft])
+  return require("notify")(output, "info", {
+    icon = " ",
+    title = "File Type",
+    timeout = 1000,
+    render = "wrapped-compact",
+    top_down = true,
+    opts = {
+      max_width = 10,
+    },
+  })
+end, { desc = "Show File Format" })
