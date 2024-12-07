@@ -57,30 +57,30 @@ local function createDiffString()
   local removed = diffparts.removed or 0
   local changed = diffparts.changed or 0
 
-  -- Start constructing the output string
-  local output = string.format("%%#LualineHead#%s%%*", head_and_icon)
+  -- Start constructing the output string (thanks to fpohtmeh on Reddit for helping with this:https://www.reddit.com/r/neovim/comments/1h866d1/comment/m0sujbd/?context=3)
+  local output = string.format("%%#lualine_b_diff_added_normal#%s", head_and_icon)
   local hasChanges = false
 
   if added > 0 or removed > 0 or changed > 0 then
-    output = output .. string.format("%%#LualineHead#%s%%*", "(")
+    output = output .. string.format("%%#lualine_b_diff_added_normal#%s", "(")
     hasChanges = true
   end
 
   if added > 0 then
-    output = output .. string.format("%%#LualineAdded#+%d%%*", added)
+    output = output .. string.format("%%#lualine_b_diff_added_normal#+%d", added)
   end
 
   if removed > 0 then
-    output = output .. string.format("%%#LualineRemoved#-%d%%*", removed)
+    output = output .. string.format("%%#lualine_b_diff_removed_normal#-%d", removed)
   end
 
   if changed > 0 then
-    output = output .. string.format("%%#LualineChanged#~%d%%*", changed)
+    output = output .. string.format("%%#lualine_b_diff_modified_normal#~%d", changed)
   end
 
   -- Close the parentheses if any changes were added
   if hasChanges then
-    output = output .. string.format("%%#LualineHead#%s%%*", ")")
+    output = output .. string.format("%%#lualine_b_diff_added_normal#%s", ")")
   end
 
   -- Return the final output
@@ -111,14 +111,6 @@ function wordCount.getWords()
     return "Not a text file"
   end
 end
-
--- local function place()
---   local colPre = "C:"
---   local col = "%c"
---   local linePre = " L:"
---   local line = "%l/%L"
---   return string.format("%s%s%s%s", colPre, col, linePre, line)
--- end
 
 --- @param trunc_width number trunctates component when screen width is less then trunc_width
 --- @param trunc_len number truncates component to trunc_len number of chars
@@ -184,12 +176,11 @@ require("lualine").setup({
     lualine_b = {
       {
         createDiffString,
-        -- color = { fg = "#ffaa88", bg = "green", gui = "italic,bold" },
         color = nil,
       },
-      -- { right_component_separator, padding = { left = 0, right = 0 } },
     },
     lualine_c = {
+      { "diff" },
       { "diagnostics", sources = { "nvim_diagnostic" }, draw_empty = false },
       function()
         return "%="
@@ -230,7 +221,6 @@ require("lualine").setup({
       nil,
     },
     lualine_x = {
-      -- { place, padding = { left = 1, right = 1 } },
       { getScrollPos, width = 100, padding = { left = 10, right = 1 } },
     },
     lualine_z = { nil },
