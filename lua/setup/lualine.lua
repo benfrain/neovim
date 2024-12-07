@@ -18,6 +18,83 @@ local mode_map = {
   ["MORE"] = "M",
 }
 
+-- stolen/amended from https://github.com/leonasdev/.dotfiles/blob/master/.config/nvim/lua/util/statusline.lua
+local function getScrollPos()
+  local progressIcons = {
+    "󰋙 ",
+    "󰫃 ",
+    "󰫄 ",
+    "󰫅 ",
+    "󰫆 ",
+    "󰫇 ",
+    "󰫈 ",
+  }
+  local current = vim.api.nvim_win_get_cursor(0)[1]
+  local lines = vim.api.nvim_buf_line_count(0)
+  local i = math.floor((current - 1) / lines * #progressIcons) + 1
+  local sbar = string.format(progressIcons[i])
+
+  local colPre = "c"
+  local col = "%c "
+
+  return string.format("%s%s%s", colPre, col, sbar)
+end
+
+-- Define custom highlights
+local colors = require("kanagawa.colors").setup()
+local palette_colors = colors.palette
+local theme_colors = colors.theme
+vim.cmd(string.format("highlight LualineHead guifg=%s", palette_colors.crystalBlue))
+vim.cmd(string.format("highlight LualineAdded guifg=%s", theme_colors.vcs.added))
+vim.cmd(string.format("highlight LualineRemoved guifg=%s", theme_colors.vcs.removed))
+vim.cmd(string.format("highlight LualineChanged guifg=%s", theme_colors.vcs.changed))
+
+local function createDiffString()
+  local diffparts = vim.b.gitsigns_status_dict
+  local head = diffparts.head or "unknown"
+  local head_and_icon = "󰘬 " .. head
+  local added = diffparts.added or 0
+  local removed = diffparts.removed or 0
+  local changed = diffparts.changed or 0
+
+  -- Start constructing the output string (thanks to fpohtmeh on Reddit for helping with this:https://www.reddit.com/r/neovim/comments/1h866d1/comment/m0sujbd/?context=3)
+  local output = string.format("%%#lualine_b_diff_added_normal#%s", head_and_icon)
+  local hasChanges = false
+
+  if added > 0 or removed > 0 or changed > 0 then
+    output = output .. string.format("%%#lualine_b_diff_added_normal#%s", "(")
+    hasChanges = true
+  end
+
+  if added > 0 then
+    output = output .. string.format("%%#lualine_b_diff_added_normal#+%d", added)
+  end
+
+  if removed > 0 then
+    output = output .. string.format("%%#lualine_b_diff_removed_normal#-%d", removed)
+  end
+
+  if changed > 0 then
+    output = output .. string.format("%%#lualine_b_diff_modified_normal#~%d", changed)
+  end
+
+  -- Close the parentheses if any changes were added
+  if hasChanges then
+    output = output .. string.format("%%#lualine_b_diff_added_normal#%s", ")")
+  end
+
+  -- Return the final output
+  return output
+end
+
+local right_component_separator = {
+  function()
+    return ""
+  end,
+  color = { bg = palette_colors.sumiInk6 },
+  padding = { left = 0, right = 0 },
+}
+
 -- Make a global table
 wordCount = {}
 -- Now add a function to it for the job needed
@@ -33,14 +110,6 @@ function wordCount.getWords()
   else
     return "Not a text file"
   end
-end
-
-local function place()
-  local colPre = "C:"
-  local col = "%c"
-  local linePre = " L:"
-  local line = "%l/%L"
-  return string.format("%s%s%s%s", colPre, col, linePre, line)
 end
 
 --- @param trunc_width number trunctates component when screen width is less then trunc_width
@@ -105,20 +174,14 @@ require("lualine").setup({
       },
     },
     lualine_b = {
-      { "branch", icon = "󰘬" },
       {
-        "diff",
-        colored = true,
-        source = diff_source,
-        diff_color = {
-          color_added = "#a7c080",
-          color_modified = "#ffdf1b",
-          color_removed = "#ff6666",
-        },
+        createDiffString,
+        color = nil,
       },
     },
     lualine_c = {
-      { "diagnostics", sources = { "nvim_diagnostic" } },
+      { "diff" },
+      { "diagnostics", sources = { "nvim_diagnostic" }, draw_empty = false },
       function()
         return "%="
       end,
@@ -128,8 +191,8 @@ require("lualine").setup({
         path = 0,
         shorting_target = 40,
         symbols = {
-          modified = "󰐖", -- Text to show when the file is modified.
-          readonly = "", -- Text to show when the file is non-modifiable or readonly.
+          modified = "󰐖 ", -- Text to show when the file is modified.
+          readonly = " ", -- Text to show when the file is non-modifiable or readonly.
           unnamed = "[No Name]", -- Text to show for unnamed buffers.
           newfile = "[New]", -- Text to show for new created file before first writting
         },
@@ -154,21 +217,13 @@ require("lualine").setup({
         separator = { left = "", right = "" },
       },
     },
+    lualine_y = {
+      nil,
+    },
     lualine_x = {
-      {
-        "fileformat",
-        icons_enabled = true,
-        symbols = {
-          unix = "LF",
-          dos = "CRLF",
-          mac = "CR",
-        },
-      },
+      { getScrollPos, width = 100, padding = { left = 10, right = 1 } },
     },
-    lualine_y = { nil },
-    lualine_z = {
-      { place, padding = { left = 1, right = 1 } },
-    },
+    lualine_z = { nil },
   },
   inactive_sections = {
     lualine_a = { { window, color = { fg = "#26ffbb", bg = "#282828" } } },
@@ -190,8 +245,8 @@ require("lualine").setup({
         path = 1,
         shorting_target = 40,
         symbols = {
-          modified = "󰐖", -- Text to show when the file is modified.
-          readonly = "", -- Text to show when the file is non-modifiable or readonly.
+          modified = "󰐖 ", -- Text to show when the file is modified.
+          readonly = " ", -- Text to show when the file is non-modifiable or readonly.
           unnamed = "[No Name]", -- Text to show for unnamed buffers.
           newfile = "[New]", -- Text to show for new created file before first writting
         },
