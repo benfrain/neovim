@@ -110,6 +110,11 @@ km.set(
   { desc = "Document Diagnostics" }
 )
 
+-- Built in LSP stuff
+-- km.set("n", "<leader>ca", function()
+--   vim.lsp.buf.code_action()
+-- end, { desc = "Code Actions" })
+
 km.set(
   "n",
   "<leader>ca",
@@ -217,3 +222,25 @@ km.set({ "n" }, "<Leader>xw", function()
     },
   })
 end, { desc = "Word Count" })
+
+-- get the file format of the current file
+km.set({ "n" }, "<Leader>xt", function()
+  local symbols = {
+    unix = " LF",
+    dos = " CRLF",
+    mac = " CR",
+  }
+
+  local ft = vim.bo.fileformat
+  local output = string.format("%s%s", ft, symbols[ft])
+  return require("notify")(output, "info", {
+    icon = " ",
+    title = "File Type",
+    timeout = 1000,
+    render = "wrapped-compact",
+    top_down = true,
+    opts = {
+      max_width = 10,
+    },
+  })
+end, { desc = "Show File Format" })
