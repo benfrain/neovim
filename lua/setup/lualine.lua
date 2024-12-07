@@ -58,11 +58,11 @@ local function createDiffString()
   local changed = diffparts.changed or 0
 
   -- Start constructing the output string (thanks to fpohtmeh on Reddit for helping with this:https://www.reddit.com/r/neovim/comments/1h866d1/comment/m0sujbd/?context=3)
-  local output = string.format("%%#lualine_b_diff_added_normal#%s", head_and_icon)
+  local output = string.format("%%#lualine_b_normal#%s", head_and_icon)
   local hasChanges = false
 
   if added > 0 or removed > 0 or changed > 0 then
-    output = output .. string.format("%%#lualine_b_diff_added_normal#%s", "(")
+    output = output .. string.format("%%#lualine_b_normal#%s", "(")
     hasChanges = true
   end
 
@@ -80,7 +80,7 @@ local function createDiffString()
 
   -- Close the parentheses if any changes were added
   if hasChanges then
-    output = output .. string.format("%%#lualine_b_diff_added_normal#%s", ")")
+    output = output .. string.format("%%#lualine_b_normal#%s", ")")
   end
 
   -- Return the final output
@@ -180,7 +180,6 @@ require("lualine").setup({
       },
     },
     lualine_c = {
-      { "diff" },
       { "diagnostics", sources = { "nvim_diagnostic" }, draw_empty = false },
       function()
         return "%="
