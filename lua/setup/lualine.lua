@@ -40,15 +40,6 @@ local function getScrollPos()
   return string.format("%s%s%s", colPre, col, sbar)
 end
 
--- Define custom highlights
-local colors = require("kanagawa.colors").setup()
-local palette_colors = colors.palette
-local theme_colors = colors.theme
-vim.cmd(string.format("highlight LualineHead guifg=%s", palette_colors.crystalBlue))
-vim.cmd(string.format("highlight LualineAdded guifg=%s", theme_colors.vcs.added))
-vim.cmd(string.format("highlight LualineRemoved guifg=%s", theme_colors.vcs.removed))
-vim.cmd(string.format("highlight LualineChanged guifg=%s", theme_colors.vcs.changed))
-
 local function createDiffString()
   local diffparts = vim.b.gitsigns_status_dict
   local head = diffparts.head or "unknown"
@@ -86,14 +77,6 @@ local function createDiffString()
   -- Return the final output
   return output
 end
-
-local right_component_separator = {
-  function()
-    return ""
-  end,
-  color = { bg = palette_colors.sumiInk6 },
-  padding = { left = 0, right = 0 },
-}
 
 -- Make a global table
 wordCount = {}
