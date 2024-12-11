@@ -2,17 +2,17 @@ return {
   keymap = {
     preset = "enter",
   },
-  highlight = {
+  appearance = {
     use_nvim_cmp_as_default = true,
+    nerd_font_variant = "mono",
   },
-  windows = {
-    autocomplete = {
+  completion = {
+    accept = { auto_brackets = { enabled = true } },
+    trigger = { signature_help = { enabled = true } },
+    menu = {
       draw = {
-        columns = { { "label", "label_description", gap = 1 }, { "kind_icon", "kind" } },
+        columns = { { "label", "label_description", gap = 2 }, { "kind_icon", "kind", gap = 2 } },
       },
     },
   },
-  nerd_font_variant = "normal",
-  accept = { auto_brackets = { enabled = true } },
-  trigger = { signature_help = { enabled = true } },
 }
