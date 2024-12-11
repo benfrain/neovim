@@ -1,13 +1,4 @@
--- LSP this is needed for LSP completions in CSS along with the snippets plugin
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities.textDocument.completion.completionItem.snippetSupport = true
-capabilities.textDocument.completion.completionItem.resolveSupport = {
-  properties = {
-    "documentation",
-    "detail",
-    "additionalTextEdits",
-  },
-}
+local capabilities = require("blink.cmp").get_lsp_capabilities()
 
 -- Give me rounded borders everywhere
 local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
@@ -17,9 +8,6 @@ function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
   return orig_util_open_floating_preview(contents, syntax, opts, ...)
 end
 
---Enable (broadcasting) snippet capability for completion
--- local capabilities = require("cmp_nvim_lsp").default_capabilities()
-
 -- LSP Server config
 require("lspconfig").cssls.setup({
   capabilities = capabilities,
@@ -27,6 +15,7 @@ require("lspconfig").cssls.setup({
     css = {
       lint = {
         emptyRules = "ignore",
+        duplicateProperties = "warning",
       },
     },
     scss = {
@@ -72,6 +61,13 @@ require("lspconfig").stylelint_lsp.setup({
     client.server_capabilities.document_formatting = false
   end,
 })
+
+-- require("lspconfig").eslint.setup({
+--   root_dir = require("lspconfig").util.root_pattern("package.json", ".git"),
+--   on_attach = function(client)
+--     client.server_capabilities.document_formatting = false
+--   end,
+-- })
 
 -- LSP Prevents inline buffer annotations
 vim.diagnostic.open_float()
