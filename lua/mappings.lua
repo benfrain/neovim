@@ -46,10 +46,11 @@ km.set("n", "<esc>", function()
   vim.cmd(":noh")
 end, { silent = true, desc = "Remove Search Highlighting, Dismiss Popups" })
 
-km.set("n", "<leader>l", ":LazyGit<cr>", { silent = true, desc = "Lazygit" })
+-- km.set("n", "<leader>l", ":LazyGit<cr>", { silent = true, desc = "Lazygit" })
+km.set("n", "<leader>l", ":lua Snacks.lazygit.open()<cr>", { silent = true, desc = "Lazygit" })
 
 -- Easy delete buffer without losing window split
-km.set("n", "<leader>d", ":lua MiniBufremove.delete()<cr>", { silent = true, desc = "Mini Bufremove" })
+km.set("n", "<leader>d", ":lua Snacks.bufdelete.delete()<cr>", { silent = true, desc = "Buffer Delete" })
 
 -- Easy add date/time
 function date()
@@ -153,15 +154,18 @@ km.set({ "n", "v" }, "h", ":Pounce<CR>", { silent = true, desc = "Pounce" })
 km.set("n", "H", ":PounceRepeat<CR>", { silent = true, desc = "Pounce Repeat" })
 
 -- thanks to https://www.reddit.com/r/neovim/comments/107g7yf/comment/j3o5a6f/?context=3 we can toggle the line mode changes in our options due to the correct variable being set here
+-- km.set("n", "<leader>z", function()
+--   if vim.g.zen_mode_active then
+--     require("zen-mode").toggle()
+--     vim.g.zen_mode_active = false
+--   else
+--     require("zen-mode").toggle()
+--     vim.g.zen_mode_active = true
+--   end
+-- end, { desc = "Zen Mode Toggle" })
 km.set("n", "<leader>z", function()
-  if vim.g.zen_mode_active then
-    require("zen-mode").toggle()
-    vim.g.zen_mode_active = false
-  else
-    require("zen-mode").toggle()
-    vim.g.zen_mode_active = true
-  end
-end, { desc = "Zen Mode Toggle" })
+  Snacks.toggle.zen():toggle()
+end, { desc = "Zen Mode" })
 
 km.set("i", "<A-BS>", "<C-W>", { desc = "Option+BS deletes whole word" })
 
@@ -209,17 +213,12 @@ km.set({ "n" }, "<Leader>xf", ":set ff=unix<CR>", { desc = "EOL = LF" })
 km.set({ "n" }, "<Leader>ws", "<CMD>new<CR>", { desc = "New split below" })
 km.set({ "n" }, "<Leader>wv", "<CMD>vnew<CR>", { desc = "New split right" })
 
--- Word Count
 km.set({ "n" }, "<Leader>xw", function()
-  return require("notify")(wordCount.getWords(), "info", {
-    icon = "󰆙 ",
+  return Snacks.notify.notify(wordCount.getWords(), {
+    zindex = 1000,
     title = "Word Count",
-    timeout = 1000,
-    render = "wrapped-compact",
-    top_down = true,
-    opts = {
-      max_width = 10,
-    },
+    timeout = 3000,
+    icon = "󰆙 ",
   })
 end, { desc = "Word Count" })
 
@@ -233,14 +232,17 @@ km.set({ "n" }, "<Leader>xt", function()
 
   local ft = vim.bo.fileformat
   local output = string.format("%s%s", ft, symbols[ft])
-  return require("notify")(output, "info", {
+  return Snacks.notify.notify(output, {
     icon = " ",
     title = "File Type",
-    timeout = 1000,
-    render = "wrapped-compact",
-    top_down = true,
-    opts = {
-      max_width = 10,
-    },
+    timeout = 2000,
+    zindex = 1000,
   })
 end, { desc = "Show File Format" })
+
+-- Toggle Terminal, thanks https://www.reddit.com/r/neovim/comments/1bjhadj/efficiently_switching_between_neovim_and_terminal/
+exitTerm = function()
+  vim.cmd(":lua Snacks.terminal.toggle()")
+end
+km.set({ "n" }, "<C-t>", ":lua Snacks.terminal.toggle()<cr>", { desc = "Toggle Terminal" })
+km.set({ "t" }, "<C-t>", exitTerm)
