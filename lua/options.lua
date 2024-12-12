@@ -51,7 +51,7 @@ opt.guicursor =
   "n-v-c-sm:block-nCursor-blinkwait50-blinkon50-blinkoff50,i-ci-ve:ver25-Cursor-blinkon100-blinkoff100,r-cr-o:hor20"
 opt.undodir = vim.fn.stdpath("config") .. "/undo"
 opt.undofile = true
-vim.notify = require("notify")
+-- vim.notify = require("notify")
 opt.jumpoptions = "view"
 opt.timeoutlen = 300 -- The time before a key sequence should complete
 opt.cpoptions:append(">") -- when you yank multiple times into a register, this puts each on a new line
