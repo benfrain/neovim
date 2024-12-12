@@ -7,9 +7,8 @@ function get_setup(name)
 end
 
 return {
-  { "kdheepak/lazygit.nvim" },
   { "rebelot/kanagawa.nvim", config = get_setup("themes/kanagawa"), priority = 1000, lazy = false },
-  { "stevearc/dressing.nvim", event = "VeryLazy" },
+  -- { "stevearc/dressing.nvim", event = "VeryLazy" },
   { "stevearc/oil.nvim", event = "VeryLazy", config = get_setup("oil") },
   {
     "stevearc/conform.nvim",
@@ -27,11 +26,6 @@ return {
     event = "VeryLazy",
   },
   {
-    "folke/zen-mode.nvim",
-    config = get_setup("zen-mode"),
-    event = "VeryLazy",
-  },
-  {
     "folke/which-key.nvim",
     config = get_setup("which-key"),
     event = "VeryLazy",
@@ -43,13 +37,18 @@ return {
     build = ":TSUpdate",
     event = "BufReadPost",
   },
-  { "rcarriga/nvim-notify", config = get_setup("notify") },
+  {
+    "folke/snacks.nvim",
+    priority = 1000,
+    lazy = false,
+    opts = require("setup.snacks"),
+  },
   {
     "saghen/blink.cmp",
     lazy = false, -- lazy loading handled internally
     -- optional: provides snippets for the snippet source
     dependencies = "rafamadriz/friendly-snippets",
-    version = "v0.7.3",
+    version = "v0.7.6",
     opts = require("setup.blink"),
   },
   {
@@ -60,6 +59,7 @@ return {
   {
     "neovim/nvim-lspconfig",
     config = get_setup("lsp"),
+    dependencies = { "saghen/blink.cmp" },
   },
   {
     "ibhagwan/fzf-lua",
@@ -70,8 +70,6 @@ return {
   { "rmagatti/auto-session", config = get_setup("auto-session") },
   { "echasnovski/mini.ai", config = get_setup("mini-ai"), version = false },
   { "echasnovski/mini.bracketed", config = get_setup("mini-bracketed"), version = false },
-  { "echasnovski/mini.bufremove", config = get_setup("mini-bufremove"), version = false },
-  { "echasnovski/mini.indentscope", config = get_setup("mini-indentscope"), version = false, event = "VeryLazy" },
   { "echasnovski/mini.move", config = get_setup("mini-move"), version = false },
   { "windwp/nvim-ts-autotag", event = "InsertEnter" },
   {
