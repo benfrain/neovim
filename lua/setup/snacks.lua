@@ -13,8 +13,7 @@ return {
     backdrop = {
       transparent = false,
     },
-  }
- },
+  } },
   quickfile = { enabled = false },
   scroll = { enabled = false },
   statuscolumn = { enabled = true },
@@ -50,9 +49,10 @@ return {
         relativenumber = false,
       },
     },
-    notifier = {
+    notification = {
       wo = {
         spell = false,
+        winblend = 0,
       },
     },
   },
