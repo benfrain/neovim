@@ -36,7 +36,7 @@ return {
   quickfile = { enabled = false },
   scroll = { enabled = false },
   statuscolumn = { enabled = true },
-  words = { enabled = true },
+  words = { enabled = false },
   toggle = {
     which_key = true, -- integrate with which-key to show enabled/disabled icons and colors
     notify = true, -- show a notification when toggling
@@ -53,14 +53,17 @@ return {
   },
   zen = {
     minimal = true,
-    win = {
-      backdrop = {
-        transparent = false,
-      },
+    toggles = {
+      dim = false,
     },
+    win = {},
   },
   styles = {
     zen = {
+      backdrop = {
+        transparent = false,
+      },
+      width = 100,
       wo = {
         number = false,
         signcolumn = "no",
