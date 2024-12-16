@@ -19,7 +19,7 @@ return {
       enabled = true,
       only_current = true,
     },
-    -- filter for buffers, turn of the indents for markdown
+    -- filter for buffers, turn off the indents for markdown
     filter = function(buf)
       return vim.g.snacks_indent ~= false
         and vim.b[buf].snacks_indent ~= false
