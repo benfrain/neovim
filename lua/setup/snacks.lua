@@ -4,9 +4,28 @@ return {
   indent = {
     enabled = true,
     char = "▎",
-    only_scope = true,
-    only_current = true,
-    scope = { animate = { enabled = false } },
+    animate = { enabled = false },
+    indent = {
+      only_current = true,
+      only_scope = true,
+    },
+    scope = {
+      enabled = true,
+      only_current = true,
+      only_scope = true,
+      underline = false,
+    },
+    chunk = {
+      enabled = true,
+      only_current = true,
+    },
+    -- filter for buffers, turn of the indents for markdown
+    filter = function(buf)
+      return vim.g.snacks_indent ~= false
+        and vim.b[buf].snacks_indent ~= false
+        and vim.bo[buf].buftype == ""
+        and vim.bo[buf].filetype ~= "markdown"
+    end,
   },
   input = { enabled = true },
   notifier = { enabled = true, win = {
