@@ -28,11 +28,14 @@ return {
     end,
   },
   input = { enabled = true },
-  notifier = { enabled = true, win = {
-    backdrop = {
-      transparent = false,
+  notifier = {
+    enabled = true,
+    win = {
+      backdrop = {
+        transparent = false,
+      },
     },
-  } },
+  },
   quickfile = { enabled = false },
   scroll = { enabled = false },
   statuscolumn = { enabled = true },
@@ -57,6 +60,10 @@ return {
       dim = false,
     },
     win = {},
+    show = {
+      statusline = false,
+      tabline = false,
+    },
   },
   styles = {
     zen = {
