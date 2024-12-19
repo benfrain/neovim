@@ -1,5 +1,10 @@
 require("fzf-lua").setup({
   fzf_opts = { ["--wrap"] = true },
+  previewers = {
+    builtin = {
+      syntax_limit_b = -102400, -- 100KB limit on highlighting files
+    },
+  },
   grep = {
     rg_glob = true,
     -- first returned string is the new search query
