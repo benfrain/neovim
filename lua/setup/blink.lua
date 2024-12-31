@@ -6,13 +6,20 @@ return {
     use_nvim_cmp_as_default = true,
     nerd_font_variant = "mono",
   },
+  sources = {
+    default = { "lsp", "path", "snippets", "buffer" },
+    min_keyword_length = function()
+      return vim.bo.filetype == "markdown" and 2 or 0
+    end,
+  },
   completion = {
-    accept = { auto_brackets = { enabled = true } },
-    trigger = { signature_help = { enabled = true } },
+    documentation = { window = { border = "single" } },
     menu = {
-      draw = {
-        columns = { { "label", "label_description", gap = 2 }, { "kind_icon", "kind", gap = 2 } },
-      },
+      border = "single",
+      auto_show = function(ctx)
+        return ctx.mode ~= "cmdline"
+      end,
     },
   },
+  signature = { window = { border = "single" } },
 }
