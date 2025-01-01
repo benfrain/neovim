@@ -16,8 +16,11 @@ return {
     documentation = { window = { border = "single" } },
     menu = {
       border = "single",
-      auto_show = function(ctx)
-        return ctx.mode ~= "cmdline"
+    },
+    ghost_text = { enabled = true },
+    list = {
+      selection = function(ctx)
+        return ctx.mode == "cmdline" and "auto_insert" or "preselect"
       end,
     },
   },
