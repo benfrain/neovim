@@ -1,10 +1,10 @@
 require("conform").setup({
   formatters_by_ft = {
     lua = { "stylua" },
-    javascript = { "prettierd", "prettier" },
-    javascriptreact = { "prettierd", "prettier" },
-    typescriptreact = { "prettierd", "prettier" },
-    typescript = { "prettierd", "prettier" },
+    javascript = { "prettierd", "prettier", stop_after_first = true },
+    javascriptreact = { "prettierd", "prettier", stop_after_first = true },
+    typescriptreact = { "prettierd", "prettier", stop_after_first = true },
+    typescript = { "prettierd", "prettier", stop_after_first = true },
     css = { "prettierd", "prettier" },
     scss = { "prettierd", "prettier" },
     markdown = { "prettierd", "prettier" },
@@ -20,10 +20,9 @@ require("conform").setup({
       args = { "--indent-width", "2", "--indent-type", "Spaces", "-" },
     },
     prettier = {
-      -- ensure a config file is in the project root
       require_cwd = true,
-      -- allowable config files
       cwd = require("conform.util").root_file({
+        "package.json",
         ".prettierrc",
         ".prettierrc.json",
         ".prettierrc.yml",
