@@ -48,7 +48,7 @@ return {
     lazy = false, -- lazy loading handled internally
     -- optional: provides snippets for the snippet source
     dependencies = "rafamadriz/friendly-snippets",
-    version = "v0.8.2",
+    version = "v0.9.2",
     opts = require("setup.blink"),
   },
   {
