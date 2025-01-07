@@ -1,5 +1,5 @@
 require("fzf-lua").setup({
-  fzf_opts = { ["--wrap"] = true },
+  "border-fused",
   previewers = {
     builtin = {
       syntax_limit_b = -102400, -- 100KB limit on highlighting files
@@ -15,11 +15,6 @@ require("fzf-lua").setup({
       -- If no separator is detected will return the original query
       return (regex or query), flags
     end,
-  },
-  winopts = {
-    preview = {
-      wrap = "wrap",
-    },
   },
   defaults = {
     git_icons = false,

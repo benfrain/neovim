@@ -230,3 +230,8 @@ km.set("n", "<leader>d", ":lua Snacks.bufdelete.delete()<cr>", { silent = true, 
 
 -- Zen Mode
 Snacks.toggle.zen():map("<leader>z")
+
+-- Show Notifier history
+km.set("n", "<leader>xh", ":lua Snacks.notifier.show_history()<cr>", { silent = true, desc = "Notifier history" })
+
+km.set("n", "<leader>gf", ":! git checkout -- % <cr>", { silent = true, desc = "Chechout current file" })
