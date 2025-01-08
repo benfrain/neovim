@@ -9,7 +9,7 @@ return {
   sources = {
     default = { "lsp", "path", "snippets", "buffer" },
     min_keyword_length = function()
-      return vim.bo.filetype == "markdown" and 2 or 0
+      return vim.bo.filetype == "markdown" and 4 or 0
     end,
   },
   completion = {
@@ -19,9 +19,14 @@ return {
     },
     ghost_text = { enabled = true },
     list = {
-      selection = function(ctx)
-        return ctx.mode == "cmdline" and "auto_insert" or "preselect"
-      end,
+      selection = {
+        preselect = function(ctx)
+          return ctx.mode ~= "cmdline"
+        end,
+        auto_insert = function(ctx)
+          return ctx.mode ~= "cmdline"
+        end,
+      },
     },
   },
   signature = { window = { border = "single" } },
