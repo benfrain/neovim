@@ -1,8 +1,14 @@
 require("fzf-lua").setup({
   "border-fused",
+  fzf_opts = { ["--wrap"] = true },
   previewers = {
     builtin = {
       syntax_limit_b = -102400, -- 100KB limit on highlighting files
+    },
+  },
+  winopts = {
+    preview = {
+      wrap = true,
     },
   },
   grep = {
