@@ -11,6 +11,11 @@ return {
     min_keyword_length = function()
       return vim.bo.filetype == "markdown" and 4 or 0
     end,
+    providers = {
+      lsp = {
+        fallbacks = {},
+      },
+    },
   },
   completion = {
     documentation = { window = { border = "single" } },
