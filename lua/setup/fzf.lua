@@ -1,3 +1,18 @@
+local path = require("fzf-lua.path")
+get_line_and_path = function(selected, opts)
+  local file_and_path = path.entry_to_file(selected[1], opts).stripped
+  vim.print(file_and_path)
+  if vim.o.clipboard == "unnamed" then
+    vim.fn.setreg([[*]], file_and_path)
+  elseif vim.o.clipboard == "unnamedplus" then
+    vim.fn.setreg([[+]], file_and_path)
+  else
+    vim.fn.setreg([["]], file_and_path)
+  end
+  -- copy to the yank register regardless
+  vim.fn.setreg([[0]], file_and_path)
+end
+
 require("fzf-lua").setup({
   "border-fused",
   fzf_opts = { ["--wrap"] = true },
@@ -27,5 +42,10 @@ require("fzf-lua").setup({
     file_icons = false,
     color_icons = false,
     formatter = "path.filename_first",
+  },
+  actions = {
+    files = {
+      ["ctrl-y"] = { fn = get_line_and_path, exec_silent = true },
+    },
   },
 })
