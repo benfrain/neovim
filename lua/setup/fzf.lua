@@ -45,6 +45,7 @@ require("fzf-lua").setup({
   },
   actions = {
     files = {
+      true,
       ["ctrl-y"] = { fn = get_line_and_path, exec_silent = true },
     },
   },
