@@ -22,7 +22,7 @@ return {
     menu = {
       border = "single",
     },
-    ghost_text = { enabled = true },
+    -- ghost_text = { enabled = true },
     list = {
       selection = {
         preselect = function(ctx)
