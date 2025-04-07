@@ -1,3 +1,5 @@
+-- Hey Ben, you always forget this! When you want to search for something literal, say 'url(' you can use this:
+-- `url( -- -F` in the search box. Everything after the double dash is the option you are passing to FZF and in this case that would be Fixed String (and not trying to parse as a regex)
 local path = require("fzf-lua.path")
 get_line_and_path = function(selected, opts)
   local file_and_path = path.entry_to_file(selected[1], opts).stripped
