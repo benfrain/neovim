@@ -9,7 +9,7 @@ function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
 end
 
 -- LSP Server config
-require("lspconfig").cssls.setup({
+vim.lsp.config("cssls", {
   capabilities = capabilities,
   settings = {
     css = {
@@ -35,23 +35,23 @@ require("lspconfig").cssls.setup({
     client.server_capabilities.document_formatting = false
   end,
 })
-require("lspconfig").ts_ls.setup({
+vim.lsp.config("ts_ls", {
   capabilities = capabilities,
   on_attach = function(client)
     client.server_capabilities.document_formatting = false
   end,
 })
 
-require("lspconfig").html.setup({
+vim.lsp.config("html", {
   capabilities = capabilities,
   on_attach = function(client)
     client.server_capabilities.document_formatting = false
   end,
 })
 
-require("lspconfig").stylelint_lsp.setup({
+vim.lsp.config("stylelint_lsp", {
   filetypes = { "css", "scss" },
-  root_dir = require("lspconfig").util.root_pattern("package.json", ".git"),
+  -- root_dir = vim.lsp.config.util.root_pattern("package.json", ".git"),
   settings = {
     stylelintplus = {
       -- see available options in stylelint-lsp documentation
