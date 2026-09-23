@@ -31,22 +31,13 @@ vim.lsp.config("cssls", {
       },
     },
   },
-  on_attach = function(client)
-    client.server_capabilities.document_formatting = false
-  end,
 })
 vim.lsp.config("ts_ls", {
   capabilities = capabilities,
-  on_attach = function(client)
-    client.server_capabilities.document_formatting = false
-  end,
 })
 
 vim.lsp.config("html", {
   capabilities = capabilities,
-  on_attach = function(client)
-    client.server_capabilities.document_formatting = false
-  end,
 })
 
 vim.lsp.config("stylelint_lsp", {
@@ -57,23 +48,23 @@ vim.lsp.config("stylelint_lsp", {
       -- see available options in stylelint-lsp documentation
     },
   },
-  on_attach = function(client)
-    client.server_capabilities.document_formatting = false
+})
+
+-- LSP Prevents inline buffer annotations
+vim.lsp.enable({ "cssls", "ts_ls", "html", "stylelint_lsp" })
+
+vim.api.nvim_create_autocmd("LspAttach", {
+  callback = function(args)
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    if client then
+      client.server_capabilities.document_formatting = false
+    end
   end,
 })
 
--- require("lspconfig").eslint.setup({
---   root_dir = require("lspconfig").util.root_pattern("package.json", ".git"),
---   on_attach = function(client)
---     client.server_capabilities.document_formatting = false
---   end,
--- })
-
--- LSP Prevents inline buffer annotations
-vim.diagnostic.open_float()
-vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+vim.diagnostic.config({
   virtual_text = false,
   signs = true,
   underline = true,
-  update_on_insert = false,
+  update_in_insert = false,
 })
