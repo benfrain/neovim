@@ -17,6 +17,7 @@ end
 
 require("fzf-lua").setup({
   "border-fused",
+  ui_select = {},
   fzf_opts = { ["--wrap"] = true },
   previewers = {
     builtin = {
