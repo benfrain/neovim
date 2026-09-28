@@ -9,6 +9,8 @@ local function close_floating()
   end
 end
 
+-- basic comment mappings using Neovims built in
+km.set({ "n", "v" }, "<Space>", ":norm gcc<CR>", { silent = true }, { desc = "Comment Line" })
 --  ┌                                                                              ┐
 --  │ These define common comment styles like this                                 │
 --  └                                                                              ┘
@@ -157,6 +159,25 @@ km.set(
   ":'<,'> w !pandoc --no-highlight --wrap=none | pbcopy <CR>",
   { silent = true, desc = "Pandoc Export" }
 )
+
+km.set("n", "<leader>xm", function()
+  return html_table_in_clipboard_to_markdown()
+end, { silent = true, desc = "Pandoc Clipboard to Markdown" })
+
+function html_table_in_clipboard_to_markdown()
+  local ok, _ = pcall(function()
+    local clipboard_content = vim.fn.getreg("+")
+
+    local cmd = "pandoc -f html -t gfm"
+    local cmd_output = vim.fn.system(cmd, clipboard_content)
+    local markdown_tbl = vim.split(cmd_output, "\n")
+
+    api.nvim_put(markdown_tbl, "l", true, true)
+  end)
+  if not ok then
+    vim.notify("Can't convert the passed table", vim.log.levels.WARN)
+  end
+end
 
 km.set("n", "<Leader>xn", ":let @+=@%<cr>", { desc = "Copy Buffer name and path" })
 
