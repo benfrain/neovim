@@ -32,9 +32,9 @@ return {
   { "brenoprata10/nvim-highlight-colors", config = get_setup("highlight-colors") },
   {
     "nvim-treesitter/nvim-treesitter",
-    config = get_setup("treesitter"),
+    branch = "main",
     build = ":TSUpdate",
-    event = "BufReadPost",
+    lazy = false,
   },
   {
     "folke/snacks.nvim",
@@ -70,7 +70,16 @@ return {
   { "echasnovski/mini.ai", config = get_setup("mini-ai"), version = false },
   { "echasnovski/mini.bracketed", config = get_setup("mini-bracketed"), version = false },
   { "echasnovski/mini.move", config = get_setup("mini-move"), version = false },
-  { "windwp/nvim-ts-autotag", event = "InsertEnter" },
+  -- polyfill for modules dropped in nvim-treesitter "main" rewrite (e.g. incremental_selection)
+  { "MeanderingProgrammer/treesitter-modules.nvim", config = get_setup("treesitter-modules") },
+  -- { "echasnovski/mini.files", version = false, config = get_setup("mini-files") },
+  {
+    "windwp/nvim-ts-autotag",
+    event = "InsertEnter",
+    config = function()
+      require("nvim-ts-autotag").setup({})
+    end,
+  },
   {
     "windwp/nvim-autopairs",
     config = get_setup("autopairs"),
